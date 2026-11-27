@@ -13,3 +13,8 @@ Included updates:
 Important deployment note:
 - Supabase Storage access for uploaded study-material files still depends on the Storage bucket policies. This package does not silently make the entire bucket public.
 - Upload all files and folders from this ZIP to the repository root when the package is approved.
+
+- Fixed a missing comma in the main game catalog that caused a JavaScript syntax error.
+- Restored the intended five updated games at the top of the catalog with ranks #1–#5.
+- Added a least-privilege Supabase SQL patch: SELECT only for published academy_content rows.
+- Added a deployment note explaining that the SQL patch must be run separately in Supabase.
