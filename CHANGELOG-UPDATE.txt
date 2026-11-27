@@ -1,0 +1,15 @@
+NEXTLEVEL LEARNING ACADEMY — UPDATE NOTES
+
+This package is prepared for the next upload after the remaining checks.
+
+Included updates:
+- Public Study Material page and public Quizzes page, with homepage desktop/mobile navigation links.
+- Existing student login, admin page, student dashboard, and current learning features retained.
+- Certificate print signature now identifies NextLevel Learning Academy rather than a personal Director/Founder name.
+- Certificate verification copy no longer includes an individual authorisation name/title.
+- Computer curriculum typing passages expanded across English, Mangal Hindi, and Kruti Dev content sets. Passages now provide fuller syllabus-oriented explanations.
+- Typing game word pools include additional computer terms, and Typing Logic Puzzle includes more computer-knowledge rounds.
+
+Important deployment note:
+- Supabase Storage access for uploaded study-material files still depends on the Storage bucket policies. This package does not silently make the entire bucket public.
+- Upload all files and folders from this ZIP to the repository root when the package is approved.

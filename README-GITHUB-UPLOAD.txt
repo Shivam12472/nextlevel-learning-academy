@@ -1,26 +1,19 @@
-NEXT LEVEL LEARNING ACADEMY
-===========================
+NEXT LEVEL LEARNING ACADEMY — GITHUB PACKAGE
 
-GITHUB UPLOAD
-1. Extract this ZIP on your device.
-2. Open your GitHub repository.
-3. Choose Add file -> Upload files.
-4. Upload the contents of this folder into the repository root.
-5. Commit the changes.
-6. If using Netlify, connect the repository and set the publish directory to the repository root.
+Files included:
+- index.html: main typing and learning application
+- account.html: existing student login and signup
+- student.html: existing authenticated student dashboard
+- admin.html: existing admin content management
+- supabase-config.js: public Supabase client configuration
+- study-material.html: new public published-materials page
+- quizzes.html: new public published-quizzes page
 
-IMPORTANT
-- Keep the original Supabase project settings and database policies unchanged.
-- Do not publish Supabase service-role keys or private credentials in frontend files.
-- Configure Row Level Security (RLS) on Supabase tables before production use.
-- Test student login, admin permissions, typing layouts, quizzes, certificates, and mobile display after deployment.
+Deploy all files in the ZIP to the root of the same static-site repository. Keep the existing Supabase project and tables.
 
-CURRICULUM UPDATE
-- 15 additional computer knowledge topics in English.
-- 15 additional computer knowledge topics in Hindi Mangal.
-- 15 additional computer knowledge topics in Hindi Kruti Dev practice bank.
-- Related knowledge questions are included with each passage.
-- Existing games remain; computer vocabulary and knowledge puzzle rounds were added.
+Public pages only query academy_content rows with is_published=true and the required content_type. Public quizzes run in the browser and do not write private student progress. Student login/dashboard/admin features are retained.
 
-This ZIP was syntax-checked for inline JavaScript. Live hosting, browser compatibility,
-Supabase authentication, and database security still require deployment testing.
+IMPORTANT — Storage access:
+The public materials page can open external content_url links directly. For uploaded files in the academy-materials Storage bucket, a Storage SELECT policy limited to published resources is still required. If that policy is not configured, the page will show a clear access error; it does not make the entire bucket public.
+
+The certificate signature now uses the academy name and no longer displays a personal Director/Founder name.
