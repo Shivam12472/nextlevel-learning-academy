@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0b2450">
+<title>Sign In | Next Level Learning Academy</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<style>
+:root{color-scheme:light}*{box-sizing:border-box}
+body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.auth-bg{background:radial-gradient(circle at 15% 15%,rgba(56,189,248,.22),transparent 32%),radial-gradient(circle at 85% 80%,rgba(99,102,241,.18),transparent 30%),linear-gradient(135deg,#071a38 0%,#0b2d59 52%,#075985 100%)}
+.auth-card{box-shadow:0 28px 80px rgba(2,12,30,.22)}
+.field{width:100%;border:1px solid #dbe4ef;border-radius:13px;padding:13px 14px;background:#fbfdff;outline:none;transition:.2s}
+.field:focus{border-color:#0284c7;box-shadow:0 0 0 4px rgba(14,165,233,.12);background:#fff}
+.tab-active{background:#fff;color:#075985;box-shadow:0 2px 8px rgba(15,23,42,.08)}
+.primary-btn{background:linear-gradient(110deg,#0369a1,#0284c7);box-shadow:0 8px 18px rgba(2,132,199,.22)}
+.primary-btn:disabled{opacity:.65;cursor:wait}
+@media(max-width:640px){.auth-bg{padding:14px}.auth-card{border-radius:22px}}
+</style>
+</head>
+<body class="auth-bg min-h-screen text-slate-800">
+<header class="max-w-7xl mx-auto px-4 sm:px-6 py-5 flex items-center justify-between gap-3">
+<a href="/" class="flex items-center gap-3 text-white no-underline">
+<span class="w-11 h-11 rounded-2xl bg-white/10 border border-white/20 grid place-items-center text-2xl">⌨️</span>
+<span><b class="block text-sm sm:text-base font-extrabold tracking-wide">NEXT LEVEL</b><span class="block text-[10px] sm:text-xs text-sky-100 tracking-[.19em] font-bold">LEARNING ACADEMY</span></span>
+</a>
+<a href="/" class="text-sm text-white/90 hover:text-white font-semibold border border-white/25 rounded-xl px-4 py-2 hover:bg-white/10">← Back to website</a>
+</header>
+<main class="max-w-6xl mx-auto px-3 sm:px-6 py-5 sm:py-10">
+<div class="grid lg:grid-cols-[1.02fr_.98fr] gap-6 lg:gap-10 items-center">
+<section class="text-white px-2 sm:px-5 py-5 lg:py-10">
+<div class="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-4 py-2 text-xs font-bold tracking-wide text-sky-100"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> YOUR PERSONAL LEARNING SPACE</div>
+<h1 class="text-4xl sm:text-5xl xl:text-6xl font-black leading-[1.08] mt-6">Learn with purpose.<br><span class="text-sky-300">Grow every day.</span></h1>
+<p class="text-sky-100/90 text-base sm:text-lg leading-relaxed mt-5 max-w-xl">Sign in to continue your learning journey. Your typing practice, games, quizzes and progress stay connected to your student account.</p>
+<div class="grid sm:grid-cols-2 gap-3 mt-8 max-w-xl">
+<div class="rounded-2xl border border-white/15 bg-white/[.08] p-4"><div class="text-2xl">⌨️</div><b class="block mt-2">Typing Progress</b><span class="text-sm text-sky-100/80">Speed, accuracy and practice history</span></div>
+<div class="rounded-2xl border border-white/15 bg-white/[.08] p-4"><div class="text-2xl">🏆</div><b class="block mt-2">Learning Achievements</b><span class="text-sm text-sky-100/80">Quizzes, games and completed lessons</span></div>
+<div class="rounded-2xl border border-white/15 bg-white/[.08] p-4"><div class="text-2xl">📚</div><b class="block mt-2">Study Resources</b><span class="text-sm text-sky-100/80">Courses, notes and video lessons</span></div>
+<div class="rounded-2xl border border-white/15 bg-white/[.08] p-4"><div class="text-2xl">☁️</div><b class="block mt-2">Cloud-Synced Records</b><span class="text-sm text-sky-100/80">Access your progress after login</span></div>
+</div>
+<p class="text-xs text-sky-100/60 mt-8">A smarter way to practice, track progress and keep learning.</p>
+</section>
+<section class="auth-card bg-white rounded-[28px] p-5 sm:p-8 lg:p-9 w-full max-w-xl mx-auto">
+<div class="mb-6"><p class="text-xs font-extrabold tracking-[.18em] text-sky-700">STUDENT & OWNER ACCESS</p><h2 class="text-2xl sm:text-3xl font-black text-slate-900 mt-2">Welcome back</h2><p class="text-sm text-slate-500 mt-2">Enter your details to access your learning dashboard.</p></div>
+<div class="grid grid-cols-2 gap-1 rounded-2xl bg-slate-100 p-1.5 mb-6">
+<button type="button" id="loginTab" class="tab-active rounded-xl py-3 text-sm font-extrabold">Sign in</button>
+<button type="button" id="signupTab" class="rounded-xl py-3 text-sm font-extrabold text-slate-500">Create account</button>
+</div>
+<form id="authForm" class="space-y-4" novalidate>
+<div id="nameWrap" class="hidden"><label for="fullName" class="block text-sm font-bold text-slate-700 mb-1.5">Full name</label><input id="fullName" class="field" autocomplete="name" maxlength="80" placeholder="Enter your full name"></div>
+<div><label for="email" class="block text-sm font-bold text-slate-700 mb-1.5">Email address</label><input id="email" type="email" required class="field" autocomplete="email" placeholder="name@example.com"></div>
+<div><div class="flex justify-between items-center mb-1.5"><label for="password" class="text-sm font-bold text-slate-700">Password</label><button type="button" id="forgotPassword" class="text-xs font-bold text-sky-700 hover:underline">Forgot password?</button></div><input id="password" type="password" minlength="8" required class="field" autocomplete="current-password" placeholder="Enter your password"></div>
+<button id="submitBtn" type="submit" class="primary-btn w-full rounded-xl text-white p-3.5 font-extrabold tracking-wide">Sign in to your account</button>
+<p id="message" class="text-sm min-h-5" role="status" aria-live="polite"></p>
+<p class="text-xs text-center text-slate-400 leading-relaxed">By continuing, you access your personal learning account. Keep your password private.</p>
+</form>
+<div id="resetPanel" class="hidden space-y-4" aria-live="polite">
+  <div><h3 class="text-xl font-black text-slate-900">Set a new password</h3><p class="text-sm text-slate-500 mt-1">Choose a password with at least 8 characters.</p></div>
+  <form id="resetForm" class="space-y-3" novalidate>
+    <div><label for="newPassword" class="block text-sm font-bold text-slate-700 mb-1.5">New password</label><input id="newPassword" type="password" minlength="8" required class="field" autocomplete="new-password" placeholder="At least 8 characters"></div>
+    <div><label for="confirmPassword" class="block text-sm font-bold text-slate-700 mb-1.5">Confirm new password</label><input id="confirmPassword" type="password" minlength="8" required class="field" autocomplete="new-password" placeholder="Enter the same password again"></div>
+    <button id="resetBtn" type="submit" class="primary-btn w-full rounded-xl text-white p-3.5 font-extrabold">Update password</button>
+    <p id="resetMessage" class="text-sm min-h-5" role="status" aria-live="polite"></p>
+  </form>
+</div>
+<div id="dashboard" class="hidden text-center py-5"><div class="mx-auto w-16 h-16 rounded-2xl bg-emerald-50 text-emerald-600 grid place-items-center text-3xl">✓</div><h2 class="text-2xl font-black mt-4">Welcome, <span id="studentName">Learner</span></h2><p class="text-slate-500 text-sm mt-2">Your account is verified. Opening your dashboard…</p><a href="/student.html" class="inline-block mt-5 rounded-xl bg-sky-700 text-white px-6 py-3 font-bold">Open dashboard</a><button id="logout" class="block w-full mt-3 border rounded-xl p-3 font-bold text-slate-600">Sign out</button></div>
+</section>
+</div>
+<footer class="text-center text-xs text-white/55 py-7">© 2026 Next Level Learning Academy · Learn. Practice. Grow.</footer>
+</main>
+<script>
+const configured=window.NLLA_SUPABASE_URL?.startsWith('https://')&&window.NLLA_SUPABASE_ANON_KEY&&!window.NLLA_SUPABASE_ANON_KEY.includes('YOUR_');
+const client=configured?window.NLLA_CREATE_SUPABASE_CLIENT():null;
+let mode='login';const $=id=>document.getElementById(id);
+function msg(t,err=false){$('message').textContent=t;$('message').className='text-sm min-h-5 '+(err?'text-rose-600':'text-emerald-700')}
+function displayName(profile,user){const raw=(profile?.full_name||user?.user_metadata?.full_name||'').trim().replace(/\s+/g,' ');if(raw)return raw;const email=user?.email||'';return email.includes('@')?email.split('@')[0]:'Learner'}
+function setMode(m){mode=m;$('nameWrap').classList.toggle('hidden',m==='login');$('fullName').required=m==='signup';$('submitBtn').textContent=m==='login'?'Sign in to your account':'Create my free account';$('loginTab').className='rounded-xl py-3 text-sm font-extrabold '+(m==='login'?'tab-active':'text-slate-500');$('signupTab').className='rounded-xl py-3 text-sm font-extrabold '+(m==='signup'?'tab-active':'text-slate-500');$('password').autocomplete=m==='login'?'current-password':'new-password';msg('')}
+$('loginTab').onclick=()=>setMode('login');$('signupTab').onclick=()=>setMode('signup');
+function resetMsg(t,err=false){$('resetMessage').textContent=t;$('resetMessage').className='text-sm min-h-5 '+(err?'text-rose-600':'text-emerald-700')}
+$('forgotPassword').onclick=async()=>{if(!client){msg('Password recovery is unavailable until Supabase is configured.',true);return}const email=$('email').value.trim();if(!email){msg('Enter your registered email address first.',true);$('email').focus();return}const btn=$('forgotPassword');btn.disabled=true;try{const {error}=await client.auth.resetPasswordForEmail(email,{redirectTo:location.origin+'/account.html'});if(error)throw error;msg('If an account exists for this email, a password reset link will be sent. Check your inbox and spam folder.')}catch(err){msg(err.message||'Unable to request a password reset.',true)}finally{btn.disabled=false}};
+$('resetForm').onsubmit=async e=>{e.preventDefault();const password=$('newPassword').value,confirm=$('confirmPassword').value;if(password.length<8){resetMsg('Password must be at least 8 characters.',true);return}if(password!==confirm){resetMsg('The passwords do not match.',true);return}if(!client){resetMsg('Supabase is not configured.',true);return}$('resetBtn').disabled=true;try{const {error}=await client.auth.updateUser({password});if(error)throw error;await client.auth.signOut();$('resetPanel').classList.add('hidden');$('authForm').classList.remove('hidden');$('loginTab').classList.remove('hidden');$('signupTab').classList.remove('hidden');setMode('login');msg('Password updated successfully. Please sign in with your new password.')}catch(err){resetMsg(err.message||'Unable to update password.',true)}finally{$('resetBtn').disabled=false}};
+$('authForm').onsubmit=async e=>{e.preventDefault();if(!client){msg('Supabase setup pending. Check supabase-config.js configuration.',true);return}
+const email=$('email').value.trim(),password=$('password').value,fullName=$('fullName').value.trim().replace(/\s+/g,' ');
+if(mode==='signup'&&fullName.length<2){msg('Please enter your full name.',true);return}
+if(mode==='signup'&&password.length<8){msg('For a new account, password must be at least 8 characters.',true);$('password').focus();return}
+$('submitBtn').disabled=true;try{let result;if(mode==='signup')result=await client.auth.signUp({email,password,options:{data:{full_name:fullName}}});else result=await client.auth.signInWithPassword({email,password});if(result.error)throw result.error;if(mode==='signup'&&!result.data.session)msg('Account created. Please check your email to confirm, then sign in.');else await showSession()}catch(err){msg(err.message||'Unable to sign in. Please try again.',true)}finally{$('submitBtn').disabled=false}};
+async function showSession(){if(!client)return;const {data:{user},error}=await client.auth.getUser();if(error||!user)return;$('authForm').classList.add('hidden');$('loginTab').classList.add('hidden');$('signupTab').classList.add('hidden');$('dashboard').classList.remove('hidden');const {data:profile}=await client.from('profiles').select('full_name,role').eq('id',user.id).maybeSingle();$('studentName').textContent=displayName(profile,user);location.href=profile?.role==='admin'?'/admin.html':'/student.html'}
+$('logout').onclick=async()=>{await client?.auth.signOut();location.reload()};
+if(client){client.auth.onAuthStateChange((event)=>{if(event==='PASSWORD_RECOVERY'){$('authForm').classList.add('hidden');$('loginTab').classList.add('hidden');$('signupTab').classList.add('hidden');$('resetPanel').classList.remove('hidden');resetMsg('Set a new password for your account.')}});client.auth.getSession().then(({data})=>{if(data.session&&!location.hash.includes('type=recovery'))showSession()})}else msg('Connect Supabase to enable student login and registration.',true);
+</script></body></html>
